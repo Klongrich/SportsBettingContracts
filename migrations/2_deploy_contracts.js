@@ -2,10 +2,8 @@
 // SPDX-License-Identifier: MIT
 
 //Names of the contract / contracts
-const Box = artifacts.require("Box");
-const HelloWorld = artifacts.require("HelloWorld");
+const Betting = artifacts.require("Betting");
 
 module.exports = function(deployer) {
-  deployer.deploy(Box);
-  deployer.deploy(HelloWorld);
+  deployer.deploy(Betting)
 };

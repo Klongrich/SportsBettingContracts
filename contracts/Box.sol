@@ -1,7 +1,7 @@
 // contracts/Box.sol
 // SPDX-License-Identifier: MIT
 // from: https://docs.openzeppelin.com/learn/developing-smart-contracts#setting-up-a-solidity-project
-pragma solidity ^0.5.0;
+pragma solidity >=0.4.22 <0.8.0;
 
 
 contract Box {

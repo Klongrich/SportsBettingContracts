@@ -47,7 +47,7 @@ module.exports = {
     },
 
     ropsten: {
-      provider: () => new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/43b86485d3164682b5d703fd1d39fe1c`),
+      provider: () => new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/90de6f047b6547e28b29b4b7176a5eea`),
       network_id: 3,       // Ropsten's id
       gas: 5500000,        // Ropsten has a lower block limit than mainnet
       confirmations: 2,    // # of confs to wait between deployments. (default: 0)
