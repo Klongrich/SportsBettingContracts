@@ -53,7 +53,6 @@ contract('Betting' , ([deployer, betterOne, betterTwo]) => {
 
             betOnePlaced = await betting.bet(1 , {from: betterOne, value: betAmount});
             betTwoPlaced = await betting.bet(2, {from: betterTwo, value: betAmount});
-
             pay_out = await betting.distributePrizes(1);
 
             //Getting Gased used by the address to send bet to contract
@@ -62,6 +61,7 @@ contract('Betting' , ([deployer, betterOne, betterTwo]) => {
             //Getting Gased Used Inside the Contract
             payOutGas = pay_out.receipt.gasUsed;
 
+            //Getting new Balance of betterOne wallet
             web3.eth.getBalance(betterOne)
             .then(function (balance) {
                 newBlanacePlayerOner = balance;
@@ -72,12 +72,21 @@ contract('Betting' , ([deployer, betterOne, betterTwo]) => {
         })
 
         //web3.eth.getAccounts(console.log);
+
+        it('Bet One Placed', async () => {   
+            assert.notEqual(betOnePlaced, null, "Bet One Not Placed")
+        })
+
+        it('Bet Two Placed', async () => {   
+            assert.notEqual(betTwoPlaced, null, "Bet Two Not Placed")
+        })
+
         //This is what the test will come up as in the terminal in the case it is "places bet"
-        it('places bet', async () => {   
+        it('Winner Payout Succesful', async () => {   
             let new_result;
             new_result = parseInt(balancePlayerOne) + parseInt(betAmount) - (placingBetGas * gasPrice);
-            assert.equal(parseInt(newBlanacePlayerOner), new_result , 'Amount Paid Out Correct');
 
+            assert.equal(parseInt(newBlanacePlayerOner), new_result , 'Amount Paid Out Is Not Correct');
         })
 
     })
