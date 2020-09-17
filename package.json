@@ -21,7 +21,7 @@
   "homepage": "https://github.com/Klongrich/SportsBettingContracts#readme",
   "dependencies": {
     "@openzeppelin/test-environment": "^0.1.4",
-    "@openzeppelin/test-helpers": "^0.5.5",
+    "@openzeppelin/test-helpers": "^0.5.6",
     "babel-polyfill": "^6.26.0",
     "babel-register": "^6.26.0",
     "chai": "^4.2.0",

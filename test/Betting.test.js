@@ -1,4 +1,7 @@
 const Betting = artifacts.require("./Betting.sol")
+const { expectRevert, time, BN, ether, balance } = require("@openzeppelin/test-helpers")
+
+
 
 require('chai')
     .use(require('chai-as-promised'))
@@ -22,7 +25,7 @@ contract('Betting' , ([deployer, betterOne, betterTwo]) => {
     })
 
     //Describe is where you chose the function you would like to test
-    describe('bet', async() => {
+    describe('bettting', async() => {
         let newBlanacePlayerOner;
         let balancePlayerOne;
         
@@ -71,8 +74,23 @@ contract('Betting' , ([deployer, betterOne, betterTwo]) => {
 
         })
 
-        //web3.eth.getAccounts(console.log);
+        it('Invaild Bet', async () => {
+            await expectRevert(
+                betting.bet(1 , {from: betterOne, value: 1000000}),
+                "revert"
+              )
+        })
 
+        it('Betting Twice Rejected', async () => {
+            await betting.bet(1 , {from: betterOne, value: betAmount});
+
+            await expectRevert(
+                betting.bet(1 , {from: betterOne, value: 1000000}),
+                "revert"
+              )
+        })
+
+        //web3.eth.getAccounts(console.log);
         it('Bet One Placed', async () => {   
             assert.notEqual(betOnePlaced, null, "Bet One Not Placed")
         })
