@@ -18,7 +18,6 @@ contract('Betting' , ([deployer, better]) => {
             assert.notEqual(address, '')
             assert.notEqual(address, null)
             assert.notEqual(address, undefined)
-
         })
     })
 
@@ -28,14 +27,13 @@ contract('Betting' , ([deployer, better]) => {
         
         //This is where you input paramters into the function / functions you want t otest.
         before(async () => {
-            result = await betting.bet(1 , {from: better , value: 100000000000 })
+            result = await betting.bet(1 , {from: better, value: web3.utils.toWei('1', 'Ether')});
         })
 
         //This is what the test will come up as in the terminal in the case it is "places bet"
         it('places bet', async () => {        
-            const event = result.logs[0].args;
+            console.log(result);
         })
-
 
     })
 })
