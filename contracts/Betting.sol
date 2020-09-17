@@ -2,6 +2,7 @@ pragma solidity >=0.4.22 <0.8.0;
 
 
 contract Betting {
+    
    address payable public owner;
    uint256 public minimumBet;
    uint256 public totalBetsOne;

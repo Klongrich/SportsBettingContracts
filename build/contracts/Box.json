@@ -6,7 +6,6 @@
       "inputs": [
         {
           "indexed": false,
-          "internalType": "uint256",
           "name": "newValue",
           "type": "uint256"
         }
@@ -18,7 +17,6 @@
       "constant": false,
       "inputs": [
         {
-          "internalType": "uint256",
           "name": "newValue",
           "type": "uint256"
         }
@@ -35,7 +33,6 @@
       "name": "retrieve",
       "outputs": [
         {
-          "internalType": "uint256",
           "name": "",
           "type": "uint256"
         }
@@ -45,11 +42,10 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newValue\",\"type\":\"uint256\"}],\"name\":\"ValueChanged\",\"type\":\"event\"},{\"constant\":true,\"inputs\":[],\"name\":\"retrieve\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newValue\",\"type\":\"uint256\"}],\"name\":\"store\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/kyle/myfiles/eth/SportsBettingContracts/contracts/Box.sol\":\"Box\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/kyle/myfiles/eth/SportsBettingContracts/contracts/Box.sol\":{\"keccak256\":\"0x07785a12dcbf84f35c7f49e100834ae65fc87b1c6350847eb27c4108f6cbd24e\",\"urls\":[\"bzz-raw://8d129065469994b6b9d1cc4386cea807da853c009160a2923ad798883ee75c34\",\"dweb:/ipfs/QmXd9E2fboRCH3rV4DiQiLEa4Qqj2y8pofvg6McpZ9GknU\"]}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b5060fd8061001f6000396000f3fe6080604052348015600f57600080fd5b506004361060325760003560e01c80632e64cec11460375780636057361d146053575b600080fd5b603d607e565b6040518082815260200191505060405180910390f35b607c60048036036020811015606757600080fd5b81019080803590602001909291905050506087565b005b60008054905090565b806000819055507f93fe6d397c74fdf1402a8b72e47b68512f0510d7b98a4bc4cbdf6ac7108b3c59816040518082815260200191505060405180910390a15056fea265627a7a7231582019124c92cf5d06b8f7bdc72d640d440be25364b09b6eb3cb5912a89f775eae4864736f6c63430005100032",
-  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060325760003560e01c80632e64cec11460375780636057361d146053575b600080fd5b603d607e565b6040518082815260200191505060405180910390f35b607c60048036036020811015606757600080fd5b81019080803590602001909291905050506087565b005b60008054905090565b806000819055507f93fe6d397c74fdf1402a8b72e47b68512f0510d7b98a4bc4cbdf6ac7108b3c59816040518082815260200191505060405180910390a15056fea265627a7a7231582019124c92cf5d06b8f7bdc72d640d440be25364b09b6eb3cb5912a89f775eae4864736f6c63430005100032",
+  "bytecode": "0x608060405234801561001057600080fd5b50610123806100206000396000f3fe6080604052600436106049576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680632e64cec114604e5780636057361d146076575b600080fd5b348015605957600080fd5b50606060ad565b6040518082815260200191505060405180910390f35b348015608157600080fd5b5060ab60048036036020811015609657600080fd5b810190808035906020019092919050505060b6565b005b60008054905090565b806000819055507f93fe6d397c74fdf1402a8b72e47b68512f0510d7b98a4bc4cbdf6ac7108b3c59816040518082815260200191505060405180910390a15056fea165627a7a72305820a50a19bad682c0388425e4f7c2c38439cfa64a7e2ea285fd8af42e2c352e0fda0029",
+  "deployedBytecode": "0x6080604052600436106049576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680632e64cec114604e5780636057361d146076575b600080fd5b348015605957600080fd5b50606060ad565b6040518082815260200191505060405180910390f35b348015608157600080fd5b5060ab60048036036020811015609657600080fd5b810190808035906020019092919050505060b6565b005b60008054905090565b806000819055507f93fe6d397c74fdf1402a8b72e47b68512f0510d7b98a4bc4cbdf6ac7108b3c59816040518082815260200191505060405180910390a15056fea165627a7a72305820a50a19bad682c0388425e4f7c2c38439cfa64a7e2ea285fd8af42e2c352e0fda0029",
   "sourceMap": "190:410:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;190:410:1;;;;;;;",
-  "deployedSourceMap": "190:410:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;190:410:1;;;;;;;;;;;;;;;;;;;;;;;;519:79;;;:::i;:::-;;;;;;;;;;;;;;;;;;;368:110;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;368:110:1;;;;;;;;;;;;;;;;;:::i;:::-;;519:79;560:7;586:5;;579:12;;519:79;:::o;368:110::-;426:8;418:5;:16;;;;449:22;462:8;449:22;;;;;;;;;;;;;;;;;;368:110;:::o",
+  "deployedSourceMap": "190:410:1:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;519:79;;8:9:-1;5:2;;;30:1;27;20:12;5:2;519:79:1;;;;;;;;;;;;;;;;;;;;;;;368:110;;8:9:-1;5:2;;;30:1;27;20:12;5:2;368:110:1;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;368:110:1;;;;;;;;;;;;;;;;;;;;519:79;560:7;586:5;;579:12;;519:79;:::o;368:110::-;426:8;418:5;:16;;;;449:22;462:8;449:22;;;;;;;;;;;;;;;;;;368:110;:::o",
   "source": "// contracts/Box.sol\n// SPDX-License-Identifier: MIT\n// from: https://docs.openzeppelin.com/learn/developing-smart-contracts#setting-up-a-solidity-project\npragma solidity >=0.4.22 <0.8.0;\n\n\ncontract Box {\n\n    uint256 private value;\n\n    // Emitted when the stored value changes\n    event ValueChanged(uint256 newValue);\n\n    // Stores a new value in the contract\n    function store(uint256 newValue) public {\n        value = newValue;\n        emit ValueChanged(newValue);\n    }\n\n    // Reads the last stored value\n    function retrieve() public view returns (uint256) {\n        return value;\n    }\n}",
   "sourcePath": "/home/kyle/myfiles/eth/SportsBettingContracts/contracts/Box.sol",
   "ast": {
@@ -756,11 +752,11 @@
   },
   "compiler": {
     "name": "solc",
-    "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
+    "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.2.5",
-  "updatedAt": "2020-09-13T14:54:29.206Z",
+  "schemaVersion": "3.0.2",
+  "updatedAt": "2020-09-17T16:37:21.153Z",
   "devdoc": {
     "methods": {}
   },
