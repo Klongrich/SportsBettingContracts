@@ -23,11 +23,16 @@ contract('Betting' , ([deployer, betterOne, betterTwo]) => {
 
     //Describe is where you chose the function you would like to test
     describe('bet', async() => {
+        let newBlanacePlayerOner;
         let balancePlayerOne;
+        
+        let gasPrice;
         let payOutGas;
         let placingBetGas;
-        let gasPrice;
 
+        let betAmount = web3.utils.toWei('0.1' , 'Ether');
+
+        //Getting current gas prices
         web3.eth.getGasPrice()
         .then(function (price) {
             gasPrice = price; 
@@ -35,6 +40,7 @@ contract('Betting' , ([deployer, betterOne, betterTwo]) => {
             console.log(e);
         })
         
+        //Getting blanace of betterOne player
         web3.eth.getBalance(betterOne)
         .then(function (balance) {
             balancePlayerOne = balance;
@@ -42,20 +48,19 @@ contract('Betting' , ([deployer, betterOne, betterTwo]) => {
             console.log(e);
         });
 
-        let newBlanacePlayerOner;
-
-        let betAmount = web3.utils.toWei('0.1' , 'Ether');
-
         //This is where you input paramters into the function / functions you want t otest.
         before(async () => {
 
-            betPlaced = await betting.bet(1 , {from: betterOne, value: betAmount});
-            await betting.bet(2, {from: betterTwo, value: betAmount});
+            betOnePlaced = await betting.bet(1 , {from: betterOne, value: betAmount});
+            betTwoPlaced = await betting.bet(2, {from: betterTwo, value: betAmount});
 
             pay_out = await betting.distributePrizes(1);
 
+            //Getting Gased used by the address to send bet to contract
+            placingBetGas = betOnePlaced.receipt.gasUsed;
+
+            //Getting Gased Used Inside the Contract
             payOutGas = pay_out.receipt.gasUsed;
-            placingBetGas = betPlaced.receipt.gasUsed;
 
             web3.eth.getBalance(betterOne)
             .then(function (balance) {
@@ -71,7 +76,6 @@ contract('Betting' , ([deployer, betterOne, betterTwo]) => {
         it('places bet', async () => {   
             let new_result;
             new_result = parseInt(balancePlayerOne) + parseInt(betAmount) - (placingBetGas * gasPrice);
-    
             assert.equal(parseInt(newBlanacePlayerOner), new_result , 'Amount Paid Out Correct');
 
         })
