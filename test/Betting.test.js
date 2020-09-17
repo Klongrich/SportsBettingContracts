@@ -4,7 +4,7 @@ require('chai')
     .use(require('chai-as-promised'))
     .should()
 
-contract('Betting' , () => {
+contract('Betting' , ([deployer, better]) => {
     let betting
 
     before(async () => {
@@ -20,10 +20,22 @@ contract('Betting' , () => {
             assert.notEqual(address, undefined)
 
         })
-
-        it('has a name', async () => {
-            const name = await marketplace.name()
-            assert.equal(name, 'silk road')
-        })
     })
-});
+
+    //Describe is where you chose the function you would like to test
+    describe('bet', async() => {
+        let result
+        
+        //This is where you input paramters into the function / functions you want t otest.
+        before(async () => {
+            result = await betting.bet(1 , {from: better , value: 100000000000 })
+        })
+
+        //This is what the test will come up as in the terminal in the case it is "places bet"
+        it('places bet', async () => {        
+            const event = result.logs[0].args;
+        })
+
+
+    })
+})
