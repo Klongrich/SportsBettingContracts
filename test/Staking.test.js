@@ -39,6 +39,10 @@ contract('Staking' , ([deployer, staker, one, two, three]) => {
             await staking.donate({from: three, value: alot});
             await staking.deposit({from: two, value: werid});
 
+            await staking.get_time.call().then(function (res) {
+                console.log("Time: " + res)
+            })
+
             total_stake = await staking.getLiquidity.call().then(function (res) {
                 console.log("Total Staked: " + res)
             })

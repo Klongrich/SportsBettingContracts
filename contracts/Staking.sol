@@ -12,7 +12,7 @@ contract Staking {
 
     struct Depositer {
         uint amount_deposited;   
-        uint time;
+        uint256 time;
     }
 
     mapping(address => Depositer) public DepositerInfo;
@@ -25,8 +25,12 @@ contract Staking {
         total_amount_staked += msg.value;
     }
 
+
     function deposit() public payable {
+
         DepositerInfo[msg.sender].amount_deposited += msg.value;
+        DepositerInfo[msg.sender].time = block.timestamp;
+
         total_amount_staked += msg.value;
         amount_staked_between_stakers += msg.value;
 
@@ -56,5 +60,9 @@ contract Staking {
 
     function getLiquidity() public view returns(uint256){
         return total_amount_staked;
+    }
+
+    function get_time() public view returns(uint256) {
+        return block.timestamp;
     }
 }
