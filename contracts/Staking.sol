@@ -50,6 +50,30 @@ contract Staking {
         depositerAddress.transfer(amount_pay_out);
     }
 
+    function stakerExists(address payable staker) public view returns(bool){
+        for(uint256 i = 0; i < stakers.length; i++){
+            if(stakers[i] == staker) return true;
+        }
+        return false;
+    }
+
+
+    function get_pay_out(address payable staker) public view returns(uint) {
+        uint bp;
+        uint amount_pay_out;
+        address payable depositerAddress;
+
+        require(stakerExists(staker), "Not a vaild Staker" );
+
+        depositerAddress = staker;
+
+        bp = DepositerInfo[depositerAddress].amount_deposited * 100000 / amount_staked_between_stakers;
+        amount_pay_out = total_amount_staked * bp / 100000;
+
+        return(amount_pay_out);
+    }
+    
+
     function get_percentage() public view returns(uint256) {
         uint bp;
 
@@ -58,7 +82,7 @@ contract Staking {
         return (total_amount_staked * bp / 1000);
     }
 
-    function getLiquidity() public view returns(uint256){
+    function get_amount_staked() public view returns(uint256){
         return total_amount_staked;
     }
 

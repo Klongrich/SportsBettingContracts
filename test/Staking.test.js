@@ -23,9 +23,6 @@ contract('Staking' , ([deployer, staker, one, two, three]) => {
         let werid = web3.utils.toWei('1' , 'Ether');
         let alot = web3.utils.toWei('3' , 'Ether');
 
-
-
-
         it('Deposit', async () => {
             
             web3.eth.getBalance(staker)
@@ -36,6 +33,8 @@ contract('Staking' , ([deployer, staker, one, two, three]) => {
             });
 
             await staking.deposit({from: staker, value: amount});
+            await staking.deposit({from: staker, value: amount});
+
             await staking.donate({from: three, value: alot});
             await staking.deposit({from: two, value: werid});
 
@@ -43,7 +42,11 @@ contract('Staking' , ([deployer, staker, one, two, three]) => {
                 console.log("Time: " + res)
             })
 
-            total_stake = await staking.getLiquidity.call().then(function (res) {
+            await staking.get_pay_out(staker).then(function (res) {
+                console.log("Staker Pay Out: " + res)
+            })
+
+            total_stake = await staking.get_amount_staked.call().then(function (res) {
                 console.log("Total Staked: " + res)
             })
 
