@@ -7,19 +7,20 @@ contract Betting {
    uint256 public minimumBet;
    uint256 public totalBetsOne;
    uint256 public totalBetsTwo;
+
    address payable[] public players;
 
    struct Player {
-      uint256 amountBet;
-   
+      uint256 amountBet;   
       uint16 teamSelected;
     }
 
 
-   mapping(address => Player) public playerInfo;
-   function() external payable {}
+  mapping(address => Player) public playerInfo;
+
+  function() external payable {}
    
-  constructor() public {
+   constructor() public {
       owner = msg.sender;
       minimumBet = 100000000000000;
     }
@@ -37,8 +38,8 @@ contract Betting {
 
     function bet(uint8 _teamSelected) public payable {
 
-      require(!checkPlayerExists(msg.sender));
-      require(msg.value >= minimumBet);
+      require(!checkPlayerExists(msg.sender), "Player already exsits");
+      require(msg.value >= minimumBet, "Value is not above 0.1 ETH");
 
       playerInfo[msg.sender].amountBet = msg.value;
       playerInfo[msg.sender].teamSelected = _teamSelected;
@@ -104,4 +105,5 @@ contract Betting {
     function getAmountOfBetTwo() public view returns(uint256){
        return totalBetsTwo;
     }
+
 }

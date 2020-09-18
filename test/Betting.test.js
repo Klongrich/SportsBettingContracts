@@ -1,5 +1,6 @@
 const Betting = artifacts.require("./Betting.sol")
 const { expectRevert, time, BN, ether, balance } = require("@openzeppelin/test-helpers")
+const { result } = require("lodash")
 
 
 
@@ -7,7 +8,7 @@ require('chai')
     .use(require('chai-as-promised'))
     .should()
 
-contract('Betting' , ([deployer, betterOne, betterTwo]) => {
+contract('Betting' , ([deployer, betterOne, betterTwo, staker]) => {
     let betting
 
     before(async () => {
