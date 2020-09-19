@@ -2,10 +2,8 @@ pragma solidity >=0.4.22 <0.8.0;
 
 contract Staking {
     
-    uint256 private transaction_fee;
     uint256 public total_amount_staked;
     uint256 public amount_staked_between_stakers;
-
 
     address owner;
     address payable[] public stakers;
@@ -25,6 +23,13 @@ contract Staking {
         total_amount_staked += msg.value;
     }
 
+    function stakerExists(address payable staker) public view returns(bool){
+        for(uint256 i = 0; i < stakers.length; i++){
+            if(stakers[i] == staker) return true;
+        }
+        return false;
+    }
+
 
     function deposit() public payable {
 
@@ -34,7 +39,9 @@ contract Staking {
         total_amount_staked += msg.value;
         amount_staked_between_stakers += msg.value;
 
-        stakers.push(msg.sender);
+        if (!stakerExists(msg.sender)) {
+            stakers.push(msg.sender);
+        }
     }
 
     function pay_out() public {
@@ -42,21 +49,26 @@ contract Staking {
         uint amount_pay_out;
         address payable depositerAddress;
 
-        depositerAddress = stakers[0];
+        for (uint256 i = 0; i < stakers.length; i++) 
+        {
+            depositerAddress = stakers[i];
 
-        bp = DepositerInfo[depositerAddress].amount_deposited * 100000 / amount_staked_between_stakers;
-        amount_pay_out = total_amount_staked * bp / 100000;
+            bp = DepositerInfo[depositerAddress].amount_deposited * 100000 / amount_staked_between_stakers;
+            amount_pay_out = (total_amount_staked * bp / 100000);
 
-        depositerAddress.transfer(amount_pay_out);
+            require(amount_pay_out < total_amount_staked);
+            depositerAddress.transfer(amount_pay_out);
+
+            DepositerInfo[depositerAddress].amount_deposited = 0;
+
+        } 
+
+        delete stakers;
+
+        total_amount_staked = 0;
+        amount_staked_between_stakers= 0;
+
     }
-
-    function stakerExists(address payable staker) public view returns(bool){
-        for(uint256 i = 0; i < stakers.length; i++){
-            if(stakers[i] == staker) return true;
-        }
-        return false;
-    }
-
 
     function get_pay_out(address payable staker) public view returns(uint) {
         uint bp;
@@ -70,7 +82,8 @@ contract Staking {
         bp = DepositerInfo[depositerAddress].amount_deposited * 100000 / amount_staked_between_stakers;
         amount_pay_out = total_amount_staked * bp / 100000;
 
-        return(amount_pay_out);
+        return(amount_pay_out - 100000000000000000);
+
     }
     
 

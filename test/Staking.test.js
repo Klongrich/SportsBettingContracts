@@ -46,6 +46,10 @@ contract('Staking' , ([deployer, staker, one, two, three]) => {
                 console.log("Staker Pay Out: " + res)
             })
 
+            await staking.get_pay_out(two).then(function (res) {
+                console.log("Two Pay Out: " + res)
+            })
+
             total_stake = await staking.get_amount_staked.call().then(function (res) {
                 console.log("Total Staked: " + res)
             })
@@ -53,6 +57,16 @@ contract('Staking' , ([deployer, staker, one, two, three]) => {
             await staking.get_percentage.call().then(function (res) {
                 console.log("Payout: " + res)
             })
+
+            await staking.pay_out();
+
+            console.log("blah");
+
+            await staking.deposit({from: staker, value: amount});
+            await staking.deposit({from: staker, value: amount});
+
+            await staking.donate({from: three, value: alot});
+            await staking.deposit({from: two, value: werid});
 
             let stuffs = await staking.pay_out();
 
@@ -64,6 +78,21 @@ contract('Staking' , ([deployer, staker, one, two, three]) => {
             }).catch(function(e) {
                 console.log(e);
             });
+    
+            
+        })
+
+        it('Deposit Round 2', async () => {
+
+            await staking.deposit({from: staker, value: amount});
+            await staking.deposit({from: staker, value: amount});
+
+            await staking.donate({from: three, value: alot});
+            await staking.deposit({from: two, value: werid});
+        
+            await staking.get_pay_out(staker).then(function (res) {
+                console.log("Staker Pay Out: " + res)
+            })
     
             
         })
