@@ -8,7 +8,15 @@ require('chai')
     .use(require('chai-as-promised'))
     .should()
 
-contract('Betting' , ([deployer, betterOne, betterTwo, staker]) => {
+contract('Betting' , ([
+    deployer,
+    betterOne, 
+    betterTwo, 
+    staker,
+    ErrorBetterOne,
+    ErrorBetterTwo
+]) => {
+
     let betting
 
     before(async () => {
@@ -22,6 +30,34 @@ contract('Betting' , ([deployer, betterOne, betterTwo, staker]) => {
             assert.notEqual(address, '')
             assert.notEqual(address, null)
             assert.notEqual(address, undefined)
+        })
+    })
+
+    describe('Error Handleing', async() => {
+        let betAmount = web3.utils.toWei('0.1' , 'Ether');
+
+        it('Invaild Bet', async () => {
+            await expectRevert(
+                betting.bet(1 , {from: ErrorBetterOne, value: 1000000}),
+                "revert"
+            )
+        })
+
+        it('Betting Twice Rejected', async () => {
+            await betting.bet(1 , {from: ErrorBetterOne, value: betAmount});
+
+            await expectRevert(
+                betting.bet(1 , {from: ErrorBetterOne, value: betAmount}),
+                "revert"
+            )
+        })
+
+        it('Outside Contract Not Able To Payout', async () => {
+
+            await expectRevert(
+                betting.distributePrizes(1, {from: ErrorBetterTwo}),
+                "revert"
+            )
         })
     })
 
@@ -57,7 +93,8 @@ contract('Betting' , ([deployer, betterOne, betterTwo, staker]) => {
 
             betOnePlaced = await betting.bet(1 , {from: betterOne, value: betAmount});
             betTwoPlaced = await betting.bet(2, {from: betterTwo, value: betAmount});
-            pay_out = await betting.distributePrizes(1);
+            
+            pay_out = await betting.distributePrizes(1)
 
             //Getting Gased used by the address to send bet to contract
             placingBetGas = betOnePlaced.receipt.gasUsed;
@@ -73,22 +110,6 @@ contract('Betting' , ([deployer, betterOne, betterTwo, staker]) => {
                 console.log(e);
             });
 
-        })
-
-        it('Invaild Bet', async () => {
-            await expectRevert(
-                betting.bet(1 , {from: betterOne, value: 1000000}),
-                "revert"
-              )
-        })
-
-        it('Betting Twice Rejected', async () => {
-            await betting.bet(1 , {from: betterOne, value: betAmount});
-
-            await expectRevert(
-                betting.bet(1 , {from: betterOne, value: 1000000}),
-                "revert"
-              )
         })
 
         //web3.eth.getAccounts(console.log);
