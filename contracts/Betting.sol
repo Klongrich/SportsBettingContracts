@@ -13,8 +13,12 @@ contract Betting {
    struct Player {
       uint256 amountBet;   
       uint16 teamSelected;
-    }
+   }
 
+   modifier mustBeOwner {
+        require(msg.sender == owner, "Only callable by Owner");
+        _;
+   }
 
   mapping(address => Player) public playerInfo;
 
@@ -55,7 +59,7 @@ contract Betting {
     }
 
 
-    function distributePrizes(uint16 teamWinner) public {
+    function distributePrizes(uint16 teamWinner) external mustBeOwner {
      
       address payable[1000] memory winners;
       uint256 count = 0; 
