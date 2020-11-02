@@ -13,6 +13,7 @@ contract Betting {
    struct Player {
       uint256 amountBet;   
       uint16 teamSelected;
+      bool registered;
    }
 
    modifier mustBeOwner {
@@ -34,10 +35,8 @@ contract Betting {
     }
     
     function checkPlayerExists(address payable player) public view returns(bool){
-        for(uint256 i = 0; i < players.length; i++){
-            if(players[i] == player) return true;
-        }
-        return false;
+         if (playerInfo[player].registered) return (true);
+         return false;
     }
 
     function bet(uint8 _teamSelected) public payable {
@@ -47,6 +46,7 @@ contract Betting {
 
       playerInfo[msg.sender].amountBet = msg.value;
       playerInfo[msg.sender].teamSelected = _teamSelected;
+      playerInfo[msg.sender].registered = true;
 
       players.push(msg.sender);
 
