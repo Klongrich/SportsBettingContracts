@@ -11,6 +11,7 @@ contract Staking {
     struct Depositer {
         uint amount_deposited;   
         uint256 time;
+        bool registered;
     }
 
     mapping(address => Depositer) public DepositerInfo;
@@ -24,24 +25,23 @@ contract Staking {
     }
 
     function stakerExists(address payable staker) public view returns(bool){
-        for(uint256 i = 0; i < stakers.length; i++){
-            if(stakers[i] == staker) return true;
-        }
+        if(DepositerInfo[staker].registered) return true;
         return false;
     }
 
 
     function deposit() public payable {
 
+        if (!stakerExists(msg.sender)) {
+            stakers.push(msg.sender);
+            DepositerInfo[msg.sender].registered = true;
+        }
+
         DepositerInfo[msg.sender].amount_deposited += msg.value;
         DepositerInfo[msg.sender].time = block.timestamp;
 
         total_amount_staked += msg.value;
         amount_staked_between_stakers += msg.value;
-
-        if (!stakerExists(msg.sender)) {
-            stakers.push(msg.sender);
-        }
     }
 
     function pay_out() public {
