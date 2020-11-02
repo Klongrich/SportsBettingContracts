@@ -60,7 +60,7 @@ contract Staking {
             depositerAddress.transfer(amount_pay_out);
 
             DepositerInfo[depositerAddress].amount_deposited = 0;
-
+            DepositerInfo[depositerAddress].registered = false;
         } 
 
         delete stakers;
